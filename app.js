@@ -14,7 +14,7 @@ require([
     const view = new MapView({
         container: "viewDiv",
         map: map,
-        center: [-79.895233, 40.860796], // Beaver County coordinates
+        center: [-79.895233, 40.860796], // Butler County coordinates
         zoom: 12
     });
 
@@ -78,6 +78,7 @@ require([
             <option value="4: Thursday (Th-Th)">Thursday</option>
             <option value="5: Friday (F-F)">Friday</option>
             <option value="6: Saturday (Sa-Sa)">Saturday</option>
+            <option value="7: Sunday (Su-Su)">Sunday</option>
         </select>
     </div>
     <div>
@@ -100,8 +101,6 @@ require([
             <option value="13: 6pm (6pm-7pm)">6pm-7pm</option>
             <option value="14: 7pm (7pm-8pm)">7pm-8pm</option>
             <option value="15: 8pm (8pm-9pm)">8pm-9pm</option>
-            <option value="16: 9pm (9pm-10pm)">9pm-10pm</option>
-            <option value="17: 10pm (10pm-11pm)">10pm-11pm</option>
         </select>
     </div>
     `;
@@ -224,9 +223,6 @@ require([
     function getODTableURL() {
         if (selectedMode === "internal") {
             // Internal trips (within Beaver County)
-            return "https://services3.arcgis.com/MV5wh5WkCMqlwISp/ArcGIS/rest/services/Butler_Transit_ODs/FeatureServer/1";
-        } else {
-            // External trips (Beaver County to outside areas)
             return "https://services3.arcgis.com/MV5wh5WkCMqlwISp/ArcGIS/rest/services/Butler_Transit_ODs/FeatureServer/1";
         }
     }
