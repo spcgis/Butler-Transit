@@ -70,7 +70,7 @@ require([
         <label for="daySelect">Day of Week:</label>
         <select id="daySelect" style="border: ${selectedDay ? '1px solid #ccc' : '1px solid #ff6b6b'}">
             <option value="">Select Day</option>
-            <option value="0: All Days (M-Su)">All (Mon-Sat)</option>
+            <option value="0: All Days (M-Su)">All (Mon-Sun)</option>
             <option value="1: Monday (M-M)">Monday</option>
             <option value="2: Tuesday (Tu-Tu)">Tuesday</option>
             <option value="3: Wednesday (W-W)">Wednesday</option>
@@ -84,7 +84,7 @@ require([
         <label for="timeSelect">Time Period:</label>
         <select id="timeSelect" disabled style="border: ${selectedTime ? '1px solid #ccc' : '1px solid #ff6b6b'}">
             <option value="">Select Time</option>
-            <option value="ALL">All Times (6am-11pm)</option>
+            <option value="ALL">All Times (6am-9pm)</option>
             <option value="01: 6am (6am-7am)">6am-7am</option>
             <option value="02: 7am (7am-8am)">7am-8am</option>
             <option value="03: 8am (8am-9am)">8am-9am</option>
@@ -379,7 +379,7 @@ require([
         });
 
         // Update legend title
-        const modeText = selectedMode === "internal" ? "Within Beaver County" : "To External Areas";
+        const modeText = selectedMode === "internal" ? "Within Butler County";
         if (legendExpand && legendExpand.content) {
             legendExpand.content.layerInfos[0].title = `Number of Trips (${modeText})`;
         }
@@ -449,7 +449,7 @@ require([
                 // Special handling for "All Days" option
                 let whereClause;
                 if (selectedDay === "0: All Days (M-Su)") {
-                    // Include all weekdays (1-6) as there's no pre-aggregated data
+                    // Include all weekdays (1-7) as there's no pre-aggregated data
                     whereClause = `Origin = '${clickedBGId}' AND Day_Type IN ('1: Monday (M-M)', '2: Tuesday (Tu-Tu)', '3: Wednesday (W-W)', '4: Thursday (Th-Th)', '5: Friday (F-F)', '6: Saturday (Sa-Sa)', '7: Sunday (Su-Su)')`;
                 } else {
                     // For specific days, use the selected day
@@ -509,7 +509,7 @@ require([
                 // Special handling for "All Days" option
                 let whereClause;
                 if (selectedDay === "0: All Days (M-Su)") {
-                    // Include all weekdays (1-6) as there's no pre-aggregated data
+                    // Include all weekdays (1-7) as there's no pre-aggregated data
                     whereClause = `Origin = '${clickedBGId}' AND Day_Type IN ('1: Monday (M-M)', '2: Tuesday (Tu-Tu)', '3: Wednesday (W-W)', '4: Thursday (Th-Th)', '5: Friday (F-F)', '6: Saturday (Sa-Sa)', '7: Sunday (Su-Su)') AND Day_Part = '${selectedTime}'`;
                 } else {
                     // For specific days, use the selected day
