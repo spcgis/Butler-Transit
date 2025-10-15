@@ -63,14 +63,14 @@ require([
     <div style="margin-bottom: 10px;">
         <label for="modeSelect">Trip Type:</label>
         <select id="modeSelect" style="border: 1px solid #ccc">
-            <option value="internal">Internal Trips (Central Butler County)</option>
+            <option value="internal">Central Butler County
         </select>
     </div>
     <div style="margin-bottom: 10px;">
         <label for="daySelect">Day of Week:</label>
         <select id="daySelect" style="border: ${selectedDay ? '1px solid #ccc' : '1px solid #ff6b6b'}">
             <option value="">Select Day</option>
-            <option value="0: All Days (M-Su)">All (Mon-Sun)</option>
+            <option value="0: All Days (M-Su)">All (Mon-Sat)</option>
             <option value="1: Monday (M-M)">Monday</option>
             <option value="2: Tuesday (Tu-Tu)">Tuesday</option>
             <option value="3: Wednesday (W-W)">Wednesday</option>
@@ -100,6 +100,7 @@ require([
             <option value="13: 6pm (6pm-7pm)">6pm-7pm</option>
             <option value="14: 7pm (7pm-8pm)">7pm-8pm</option>
             <option value="15: 8pm (8pm-9pm)">8pm-9pm</option>
+            
         </select>
     </div>
     `;
@@ -221,9 +222,9 @@ require([
     // Modify the getODTableURL function to use different layers based on mode
     function getODTableURL() {
         if (selectedMode === "internal") {
-            // Internal trips (within Beaver County)
+            // Internal trips (within Greene County)
             return "https://services3.arcgis.com/MV5wh5WkCMqlwISp/ArcGIS/rest/services/Butler_Transit_ODs/FeatureServer/1";
-        }
+        } 
     }
 
     // Modify the OD table setup
@@ -379,7 +380,7 @@ require([
         });
 
         // Update legend title
-        const modeText = selectedMode === "internal" ? "Within Butler County";
+        const modeText = selectedMode === "internal" ? "Within Beaver County" : "To External Areas";
         if (legendExpand && legendExpand.content) {
             legendExpand.content.layerInfos[0].title = `Number of Trips (${modeText})`;
         }
@@ -449,7 +450,7 @@ require([
                 // Special handling for "All Days" option
                 let whereClause;
                 if (selectedDay === "0: All Days (M-Su)") {
-                    // Include all weekdays (1-7) as there's no pre-aggregated data
+                    // Include all weekdays (1-6) as there's no pre-aggregated data
                     whereClause = `Origin = '${clickedBGId}' AND Day_Type IN ('1: Monday (M-M)', '2: Tuesday (Tu-Tu)', '3: Wednesday (W-W)', '4: Thursday (Th-Th)', '5: Friday (F-F)', '6: Saturday (Sa-Sa)', '7: Sunday (Su-Su)')`;
                 } else {
                     // For specific days, use the selected day
@@ -509,7 +510,7 @@ require([
                 // Special handling for "All Days" option
                 let whereClause;
                 if (selectedDay === "0: All Days (M-Su)") {
-                    // Include all weekdays (1-7) as there's no pre-aggregated data
+                    // Include all weekdays (1-6) as there's no pre-aggregated data
                     whereClause = `Origin = '${clickedBGId}' AND Day_Type IN ('1: Monday (M-M)', '2: Tuesday (Tu-Tu)', '3: Wednesday (W-W)', '4: Thursday (Th-Th)', '5: Friday (F-F)', '6: Saturday (Sa-Sa)', '7: Sunday (Su-Su)') AND Day_Part = '${selectedTime}'`;
                 } else {
                     // For specific days, use the selected day
@@ -652,7 +653,7 @@ require([
         
         // Determine which mode is active for the header
         const modeTitle = selectedMode === "internal" ? 
-            "Trips Within Butler County" : 
+            "Internal Trips (Within Greene County)" : 
             "External Trips (To Outside Areas)";
         
         let content = `
@@ -779,3 +780,4 @@ require([
         return breakInfo ? breakInfo.symbol.color : tripsRenderer.defaultSymbol.color;
     }
 });
+
