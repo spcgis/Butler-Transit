@@ -1,21 +1,32 @@
-html,
-body,
-#viewDiv {
-    padding: 0;
-    margin: 0;
-    height: 100%;
-    width: 100%;
+html, body { 
+    padding: 0; 
+    margin: 0; 
+    height: 100%; 
+    width: 100%; 
+}
+
+#filterContainer {
+    background: white;
+    padding: 10px;
+    border-radius: 3px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    width: 200px;
+    font-size: small;
 }
 
 #filterContainer select {
-    margin: 5px 0;
-    padding: 5px;
-    width: 200px;
+    width: 100%;
+    font-size: small;
 }
 
 #sidePanel {
-    background-color: white;
+    background: white;
     padding: 15px;
     border-radius: 3px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    width: 270px;
+    display: none;
+    max-height: 200px;
+    font-size: small;
+    overflow-y: auto;
 }
